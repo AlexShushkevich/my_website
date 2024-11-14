@@ -4,7 +4,6 @@ class Product(models.Model):
     GROUP_CHOICES = [
         ('steel', 'Стальные люки'),
         ('aluminum', 'Алюминиевые люки'),
-        # Добавьте больше групп по мере необходимости
     ]
 
     name = models.CharField(max_length=100)
