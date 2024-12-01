@@ -14,7 +14,8 @@ SECRET_KEY = 'django-insecure-&42$kh%tbi66+vydmg5batscr&0wga(gj20e6b9w&9p(9o4y(4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
 
 
 # Application definition
@@ -27,10 +28,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'users.apps.UsersConfig',
-    'products.apps.ProductsConfig',
     'drf_yasg',
     'django_filters',
+    'users',
+    'products',
     'corsheaders',
 
 ]
@@ -39,13 +40,31 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
-CORS_ALLOW_ALL_ORIGINS = True
+
+# CSRF и CORS настройки
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # URL фронтенда
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_COOKIE_HTTPONLY = False # Токен доступен в JavaScript
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_NAME = "csrftoken"
+
+MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',  # URL фронтенда
+]
+
+
 ROOT_URLCONF = 'myproject.urls'
 
 TEMPLATES = [
@@ -101,8 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
+
 
 LANGUAGE_CODE = 'ru-ru'
 
@@ -113,25 +131,24 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
+
 
 STATIC_URL = 'static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.CustomUser'
+
 
 # Настройка для использования JWT:
 REST_FRAMEWORK = {
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-    # ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
+AUTH_USER_MODEL = 'users.CustomUser'
 

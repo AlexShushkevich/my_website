@@ -1,8 +1,7 @@
 from rest_framework import generics, permissions, filters
 from .models import Product
 from .serializers import ProductSerializer
-from rest_framework import viewsets
-from django_filters.rest_framework import DjangoFilterBackend
+
 
 # Список всех товаров
 class ProductListView(generics.ListCreateAPIView):
