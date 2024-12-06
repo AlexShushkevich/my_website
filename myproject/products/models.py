@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+
 class Product(models.Model):
     GROUP_CHOICES = [
         ('steel', 'Стальные люки'),
@@ -8,14 +9,16 @@ class Product(models.Model):
     ]
 
     name = models.CharField(max_length=100)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField(default="Описание отсутствует")
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     group = models.CharField(max_length=50, choices=GROUP_CHOICES, default='steel')
+    image = models.ImageField(upload_to='product_images/', blank=True, null=True)  # Поле для изображений
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
+
 
 
 class Cart(models.Model):

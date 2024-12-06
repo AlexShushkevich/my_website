@@ -1,6 +1,6 @@
 
 from pathlib import Path
-
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -14,6 +14,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+os.makedirs(os.path.join(MEDIA_ROOT, 'product_images'), exist_ok=True)
 
 
 INSTALLED_APPS = [
@@ -29,6 +32,7 @@ INSTALLED_APPS = [
     'users',
     'products',
     'corsheaders',
+    'myparser',
 
 ]
 

@@ -9,11 +9,11 @@ from .serializers import CartSerializer
 
 # Список всех товаров
 class ProductListView(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().order_by("-created_at")
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
-    filter_backends = [filters.OrderingFilter]
-    search_fields = ['name']
+    filter_backends = [filters.OrderingFilter, filters.SearchFilter]
+    search_fields = ["name", "description"]
 
 
 # Детали конкретного товара
