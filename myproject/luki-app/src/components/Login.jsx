@@ -1,47 +1,48 @@
 import React, { useState } from 'react';
-import api from './api'; // Импортируем api из api.jsx
+import { useNavigate } from 'react-router-dom';
+import api from './api';
 
 const Login = ({ handleLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-    const handleLoginSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Попытка входа с данными:', { username, password });
         try {
             const response = await api.post('/users/login/', { username, password });
-            console.log('Ответ сервера:', response.data);
             const { access, refresh } = response.data;
 
-            // Сохраняем токены
+            // Сохраняем токены в localStorage
             localStorage.setItem('access_token', access);
             localStorage.setItem('refresh_token', refresh);
 
-            // Вызов функции handleLogin
+            // Обновляем состояние аутентификации в родительском компоненте
             handleLogin();
-            alert('Авторизация успешна!');
+
+            // Перенаправляем на страницу с товарами
+            navigate('/products');
         } catch (err) {
             console.error('Ошибка авторизации:', err.response?.data || err.message);
-            const errorMessage = err.response?.data?.error || 'Ошибка авторизации';
-            setError(errorMessage);
+            setError(err.response?.data?.error || 'Ошибка авторизации');
         }
     };
 
     return (
         <div>
             <h2>Вход</h2>
-            <form onSubmit={handleLoginSubmit}>
+            <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    placeholder="Username"
+                    placeholder="Логин"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
                 />
                 <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Пароль"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -54,6 +55,7 @@ const Login = ({ handleLogin }) => {
 };
 
 export default Login;
+
 
 
 

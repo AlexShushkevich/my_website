@@ -1,19 +1,21 @@
 import React from 'react';
 
 const Cart = ({ cartItems, removeFromCart }) => {
-    const total = cartItems.reduce(
-        (sum, item) => sum + parseFloat(item.price) * item.quantity,
-        0
-    );
+    const total = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
     return (
         <div>
             {cartItems.length > 0 ? (
                 <div>
-                    {cartItems.map((item, index) => (
-                        <div key={index} className="d-flex justify-content-between align-items-center mb-2">
-                            <span>{item.name} ({item.quantity} шт.)</span>
-                            <button className="btn btn-danger btn-sm" onClick={() => removeFromCart(index)}>
+                    {cartItems.map((item) => (
+                        <div key={item.product.id} className="d-flex justify-content-between align-items-center mb-2">
+                            <span>
+                                {item.product.name} ({item.quantity} шт.)
+                            </span>
+                            <button
+                                className="btn btn-danger btn-sm"
+                                onClick={() => removeFromCart(item.product.id)}
+                            >
                                 Удалить
                             </button>
                         </div>
@@ -28,3 +30,6 @@ const Cart = ({ cartItems, removeFromCart }) => {
 };
 
 export default Cart;
+
+
+

@@ -5,61 +5,76 @@ import Products from './pages/Products';
 import NotFound from './pages/NotFound';
 import Registration from './components/Registration';
 import Login from './components/Login';
+import api from './components/api';
 
 const App = () => {
     const [cartItems, setCartItems] = useState([]);
-    const [isAuthenticated, setIsAuthenticated] = useState(false); // Стейт для отслеживания состояния аутентификации
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // Загрузка корзины из localStorage
-    useEffect(() => {
-        const savedCart = localStorage.getItem('cart');
-        if (savedCart) {
-            setCartItems(JSON.parse(savedCart));
+    // Загрузка корзины с сервера
+    const fetchCart = async () => {
+        try {
+            const response = await api.get('/cart/');
+            setCartItems(response.data.items);
+        } catch (error) {
+            console.error('Ошибка при загрузке корзины:', error.response?.data || error.message);
         }
-    }, []);
+    };
 
-    // Сохранение корзины в localStorage
+    // Обновление корзины
+    const refreshCart = () => {
+        fetchCart();
+    };
+
     useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cartItems));
-    }, [cartItems]);
+        if (isAuthenticated) {
+            fetchCart();
+        }
+    }, [isAuthenticated]);
 
-    // Добавить товар в корзину
-    const addToCart = (product) => {
+    const addToCart = async (productId, quantity = 1) => {
         if (!isAuthenticated) {
             alert('Для добавления товара в корзину необходимо войти!');
             return;
         }
 
-        const existingIndex = cartItems.findIndex(item => item.id === product.id);
-        if (existingIndex >= 0) {
-            const updatedCart = [...cartItems];
-            updatedCart[existingIndex].quantity += 1;
-            setCartItems(updatedCart);
-        } else {
-            setCartItems([...cartItems, { ...product, quantity: 1 }]);
+        const data = { product_id: productId, quantity };
+        try {
+            await api.post('/cart/', data);
+            alert('Товар добавлен в корзину!');
+            refreshCart();
+        } catch (err) {
+            console.error('Ошибка при добавлении товара:', err.response?.data || err.message);
+            alert('Ошибка при добавлении товара.');
         }
     };
 
-    // Удалить товар из корзины
-    const removeFromCart = (index) => {
-        const updatedCart = cartItems.filter((_, i) => i !== index);
-        setCartItems(updatedCart);
+    const removeFromCart = async (itemId) => {
+        try {
+            await api.delete('/cart/', { data: { product_id: itemId } });
+            alert('Товар удален из корзины!');
+            refreshCart(); // Обновляем корзину после удаления
+        } catch (err) {
+            console.error('Ошибка при удалении товара:', err.response?.data || err.message);
+            alert('Ошибка при удалении товара.');
+        }
     };
 
-    // Функции для входа и регистрации
     const handleLogin = () => {
         setIsAuthenticated(true);
+        fetchCart();
     };
 
     const handleLogout = () => {
         setIsAuthenticated(false);
+        setCartItems([]);
     };
 
     return (
         <Router>
             <div className="app">
                 <Routes>
-                    <Route path="/" element={<Home addToCart={addToCart} />} />
+                    <Route path="/" element={<Home />} />
                     <Route
                         path="/products"
                         element={
@@ -67,13 +82,13 @@ const App = () => {
                                 cartItems={cartItems}
                                 addToCart={addToCart}
                                 removeFromCart={removeFromCart}
-                                isAuthenticated={isAuthenticated} // Передаем статус аутентификации
+                                refreshCart={refreshCart}
+                                isAuthenticated={isAuthenticated}
                             />
                         }
                     />
                     <Route path="/register" element={<Registration />} />
                     <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-                    <Route path="/logout" element={<NotFound />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
                 {isAuthenticated ? (
@@ -90,6 +105,16 @@ const App = () => {
 };
 
 export default App;
+
+
+
+
+
+
+
+
+
+
 
 
 
