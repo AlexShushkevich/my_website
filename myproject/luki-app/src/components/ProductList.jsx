@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from './api';
 import ProductCard from './ProductCard';
 
-const ProductList = ({ refreshCart, isAuthenticated }) => { // Добавляем isAuthenticated в параметры
+const ProductList = ({ refreshCart, isAuthenticated }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -41,27 +41,27 @@ const ProductList = ({ refreshCart, isAuthenticated }) => { // Добавляе�
     };
 
     return (
-        <div className="container mt-4">
-            <h2 className="mb-4">Товары</h2>
+        <div className="row"> {/* Оборачиваем в row для корректной сетки */}
             {loading ? (
                 <div>Загрузка...</div>
             ) : (
-                <div className="row">
-                    {products.map(product => (
-                        <div key={product.id} className="col-md-4">
-                            <ProductCard
-                                product={product}
-                                addToCart={() => addToCart(product.id)}
-                            />
-                        </div>
-                    ))}
-                </div>
+                products.map(product => (
+                    <div key={product.id} className="col-6 col-sm-4 col-lg-2 mb-3 mx-0">
+                        <ProductCard
+                            product={product}
+                            addToCart={() => addToCart(product.id)}
+                        />
+                    </div>
+                ))
             )}
         </div>
     );
 };
 
 export default ProductList;
+
+
+
 
 
 

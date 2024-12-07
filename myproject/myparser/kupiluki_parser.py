@@ -1,22 +1,21 @@
 import os
 import requests
 import base64
+from io import BytesIO
+from PIL import Image
 from bs4 import BeautifulSoup
 from products.models import Product
 from django.conf import settings
 
 
 class KupilukiParser:
-    BASE_URL = "https://lukoff.by/category/nazhimnye-ljuki-pod-plitku/stalnoj-ljuk-lukoff-st/"
+    BASE_URL = "https://kupiluki.by/catalog/lyuki_pod_plitku/lyuki_evrostandart/"
 
     HEADERS = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     }
 
     def fetch_html(self, url):
-        """
-        Получает HTML-код страницы.
-        """
         try:
             response = requests.get(url, headers=self.HEADERS)
             response.raise_for_status()
@@ -26,11 +25,8 @@ class KupilukiParser:
             return ""
 
     def parse_page(self, html):
-        """
-        Парсит HTML-страницу и извлекает данные о товарах.
-        """
         soup = BeautifulSoup(html, 'lxml')
-        product_cards = soup.find_all('div', class_='product-wrapper')
+        product_cards = soup.find_all('div', class_='item_block js-notice-block grid-list__item grid-list-border-outer')
 
         if not product_cards:
             print("Не найдены карточки товаров. Проверьте структуру HTML.")
@@ -40,11 +36,11 @@ class KupilukiParser:
         for card in product_cards:
             try:
                 # Извлекаем название товара
-                name_tag = card.find('h3', class_='wd-entities-title')
+                name_tag = card.find('div', class_='item-title')
                 name = name_tag.get_text(strip=True) if name_tag else "Неизвестный товар"
 
                 # Извлекаем цену товара
-                price_tag = card.find('span', class_='woocommerce-Price-amount amount')
+                price_tag = card.find('span', class_='price_value')
                 price_text = price_tag.get_text(strip=True) if price_tag else "0"
                 price = float(price_text.replace('руб.', '').replace(',', '.').strip())
 
@@ -62,31 +58,32 @@ class KupilukiParser:
         return products
 
     def save_image(self, image_url):
-        """
-        Сохраняет изображение из URL или Base64-кода.
-        """
         if not image_url:
             return None
 
         try:
-            # Проверка на Base64-данные
+            # Если это встроенный Base64-URL
             if image_url.startswith("data:image"):
-                # Извлечение типа изображения и данных
                 image_type, base64_data = image_url.split(',', 1)
                 extension = image_type.split('/')[1].split(';')[0]  # Например, jpg или png
                 image_name = f"product_image_{hash(image_url)}.{extension}"
                 save_path = os.path.join(settings.MEDIA_ROOT, 'product_images', image_name)
 
-                # Декодируем и сохраняем изображение
+                # Создаём директорию, если её нет
                 os.makedirs(os.path.dirname(save_path), exist_ok=True)
-                with open(save_path, 'wb') as f:
-                    f.write(base64.b64decode(base64_data))
+
+                # Декодируем и уменьшаем изображение
+                image_data = base64.b64decode(base64_data)
+                img = Image.open(BytesIO(image_data))
+                img = img.convert("RGB")
+                img.thumbnail((100, 100))
+                img.save(save_path, format="JPEG", quality=85)
 
                 return f'product_images/{image_name}'
 
             # Если это обычный URL
             if not image_url.startswith(('http://', 'https://')):
-                image_url = f"https://lukoff.by{image_url}"
+                image_url = f"https://kupiluki.by{image_url}"
 
             response = requests.get(image_url)
             response.raise_for_status()
@@ -98,9 +95,11 @@ class KupilukiParser:
             # Создаём директорию, если её нет
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
-            # Сохраняем файл
-            with open(save_path, 'wb') as f:
-                f.write(response.content)
+            # Уменьшаем изображение перед сохранением
+            img = Image.open(BytesIO(response.content))
+            img = img.convert("RGB")
+            img.thumbnail((300, 300))  # Уменьшение до 300x300
+            img.save(save_path, format="JPEG", quality=85)
 
             # Возвращаем путь относительно MEDIA_ROOT
             return f'product_images/{image_name}'
@@ -137,6 +136,3 @@ class KupilukiParser:
                     print(f"Товар '{product['name']}' обновлен в базе.")
             except Exception as e:
                 print(f"Ошибка при сохранении товара '{product['name']}': {e}")
-
-
-

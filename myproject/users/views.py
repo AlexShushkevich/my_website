@@ -12,7 +12,7 @@ def csrf_token_view(request):
     return JsonResponse({'csrfToken': get_token(request)})
 
 
-@csrf_exempt  # Отключаем CSRF для маршрута логина
+@csrf_exempt
 def register(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -27,7 +27,7 @@ def register(request):
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 
-@csrf_exempt  # Отключаем CSRF для логина
+@csrf_exempt
 def user_login(request):
     if request.method == 'POST':
         data = json.loads(request.body)
