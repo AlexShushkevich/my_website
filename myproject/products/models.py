@@ -4,14 +4,16 @@ from django.conf import settings
 
 class Product(models.Model):
     GROUP_CHOICES = [
-        ('steel', 'Стальные люки'),
-        ('aluminum', 'Алюминиевые люки'),
+        ('eurostandard', 'Евростандарт'),
+        ('diplomat', 'Дипломат'),
+        ('pogrebok', 'Погребок'),
+        ('pogrebok-mini', 'Погребок мини'),
     ]
 
     name = models.CharField(max_length=100)
     description = models.TextField(default="Описание отсутствует")
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
-    group = models.CharField(max_length=50, choices=GROUP_CHOICES, default='steel')
+    group = models.CharField(max_length=50, choices=GROUP_CHOICES, default='NONE')
     image = models.ImageField(upload_to='product_images/', blank=True, null=True)  # Поле для изображений
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

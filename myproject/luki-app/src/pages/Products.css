@@ -1,0 +1,24 @@
+/* Products.css */
+.products-container {
+    padding: 20px;
+}
+
+.products-content {
+    display: flex;
+    gap: 30px;
+}
+
+.product-list-container {
+    flex: 3;
+}
+
+.cart-container {
+    flex: 1;
+    max-width: 300px;
+    position: sticky;
+    top: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}

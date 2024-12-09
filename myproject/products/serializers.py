@@ -2,9 +2,11 @@ from rest_framework import serializers
 from .models import Product, Cart, CartItem
 
 class ProductSerializer(serializers.ModelSerializer):
+    group_display = serializers.CharField(source='get_group_display')  # Добавляем поле для отображения категории на русском
+
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ['id', 'name', 'description', 'price', 'group', 'group_display', 'image', 'created_at', 'updated_at']
 
 
 class CartItemSerializer(serializers.ModelSerializer):

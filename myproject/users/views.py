@@ -2,7 +2,11 @@ from django.contrib.auth import logout, authenticate
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import CustomUser
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .models import CustomUser, UserProfile
+from .serializers import UserProfileSerializer
 import json
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 
@@ -18,12 +22,19 @@ def register(request):
         data = json.loads(request.body)
         username = data.get('username')
         password = data.get('password')
+
         if not username or not password:
             return JsonResponse({'error': 'Username and password required'}, status=400)
+
         if CustomUser.objects.filter(username=username).exists():
             return JsonResponse({'error': 'User already exists'}, status=400)
-        CustomUser.objects.create_user(username=username, password=password)
+
+        # Create user
+        user = CustomUser.objects.create_user(username=username, password=password)
+
+        # The profile is automatically created through the signal (no need to manually create it here)
         return JsonResponse({'message': 'User registered successfully'}, status=201)
+
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 
@@ -45,7 +56,9 @@ def user_login(request):
                 'access': str(refresh.access_token),
                 'refresh': str(refresh)
             })
+
         return JsonResponse({'error': 'Invalid credentials'}, status=400)
+
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 
@@ -54,4 +67,29 @@ def user_logout(request):
     return JsonResponse({'message': 'Logged out successfully'})
 
 
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
 
+    def get(self, request):
+        try:
+            profile = request.user.profile
+        except UserProfile.DoesNotExist:
+            return Response({'error': 'Profile not found'}, status=404)
+
+        # Serialize the profile data
+        serializer = UserProfileSerializer(profile)
+        return Response(serializer.data)
+
+    def put(self, request):
+        # Try to get the user profile or create one if it does not exist
+        try:
+            profile = request.user.profile
+        except UserProfile.DoesNotExist:
+            profile = UserProfile.objects.create(user=request.user)
+
+        serializer = UserProfileSerializer(profile, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors, status=400)

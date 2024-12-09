@@ -9,7 +9,7 @@ from django.conf import settings
 
 
 class KupilukiParser:
-    BASE_URL = "https://kupiluki.by/catalog/lyuki_pod_plitku/lyuki_evrostandart/"
+    BASE_URL = "https://kupiluki.by/catalog/napolnye_lyuki/lyuki_napolnye_semnye_pogrebok_mini/"
 
     HEADERS = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -108,9 +108,7 @@ class KupilukiParser:
             return None
 
     def save_to_database(self):
-        """
-        Сохраняет данные о товарах в базу данных.
-        """
+
         html = self.fetch_html(self.BASE_URL)
         products = self.parse_page(html)
 
@@ -126,7 +124,7 @@ class KupilukiParser:
                     name=product['name'],
                     defaults={
                         'price': product['price'],
-                        'group': 'steel',  # Группа по умолчанию
+                        'group': 'pogrebok-mini',
                         'image': image_path,
                     },
                 )

@@ -1,73 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import api from './api';
-import ProductCard from './ProductCard';
+import React from 'react';
+import './ProductList.css'; // Убедитесь, что стили подключены
 
-const ProductList = ({ refreshCart, isAuthenticated }) => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    // Загрузка списка товаров
-    useEffect(() => {
-        api.get('/products/')
-            .then(response => {
-                setProducts(response.data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Ошибка при загрузке товаров:', error);
-                setLoading(false);
-            });
-    }, []);
-
-    // Логика добавления товара в корзину
-    const addToCart = async (productId, quantity = 1) => {
-        if (!isAuthenticated) {
-            alert('Для добавления товара в корзину необходимо войти!');
-            return;
-        }
-        const data = { product_id: productId, quantity };
-        try {
-            await api.post('/cart/', data);
-            alert('Товар добавлен в корзину!');
-            refreshCart();
-        } catch (err) {
-            console.error('Ошибка при добавлении товара:', err.response?.data || err.message);
-            if (err.response?.status === 401) {
-                alert('Вы должны войти в систему, чтобы добавить товары в корзину.');
-            } else {
-                alert('Ошибка при добавлении товара.');
-            }
-        }
-    };
-
+const ProductList = ({ products, addToCart }) => {
     return (
-        <div className="row"> {/* Оборачиваем в row для корректной сетки */}
-            {loading ? (
-                <div>Загрузка...</div>
-            ) : (
-                products.map(product => (
-                    <div key={product.id} className="col-6 col-sm-4 col-lg-2 mb-3 mx-0">
-                        <ProductCard
-                            product={product}
-                            addToCart={() => addToCart(product.id)}
-                        />
-                    </div>
-                ))
-            )}
+        <div className="product-list">
+            {products.map((product) => (
+                <div key={product.id} className="product-card">
+                    <img src={product.image} alt={product.name} className="product-image" />
+                    <h3>{product.name}</h3>
+                    <p>{product.price} руб.</p>
+                    <button
+                        className="add-to-cart-btn"
+                        onClick={() => addToCart(product.id)}>
+                        Добавить в корзину
+                    </button>
+                </div>
+            ))}
         </div>
     );
 };
 
 export default ProductList;
-
-
-
-
-
-
-
-
-
-
-
 
