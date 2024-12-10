@@ -1,5 +1,5 @@
 import React from 'react';
-import './ProductList.css'; // Убедитесь, что стили подключены
+import './ProductList.css';
 
 const ProductList = ({ products, addToCart }) => {
     return (
@@ -7,8 +7,8 @@ const ProductList = ({ products, addToCart }) => {
             {products.map((product) => (
                 <div key={product.id} className="product-card">
                     <img src={product.image} alt={product.name} className="product-image" />
-                    <h3>{product.name}</h3>
-                    <p>{product.price} руб.</p>
+                    <h5>{product.name}</h5>
+                    <h4>{product.price} руб.</h4>
                     <button
                         className="add-to-cart-btn"
                         onClick={() => addToCart(product.id)}>

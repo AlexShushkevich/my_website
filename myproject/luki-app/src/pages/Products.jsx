@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductList from '../components/ProductList';
 import Cart from '../components/Cart';
-import './Products.css'; // Стили для страницы продуктов
+import './Products.css';
 
 const Products = ({ products, cartItems, addToCart, removeFromCart, refreshCart, isAuthenticated }) => {
     const navigate = useNavigate();

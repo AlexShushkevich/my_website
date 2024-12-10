@@ -4,9 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df2c707d-49ff-46f3-9874-ba61d510201b" name="Changes" comment="add products">
+    <list default="true" id="df2c707d-49ff-46f3-9874-ba61d510201b" name="Changes" comment="Почти готово">
+      <change afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ModalCallRequest.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductCard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/my_website.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/my_website.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/products/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/products/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/Header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/Cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/Cart.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/Modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/Modal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductList.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductList.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/pages/Products.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/pages/Products.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/users/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/users/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,13 +60,30 @@
   &quot;keyToString&quot;: {
     &quot;Python.test.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/darke/PycharmProjects/my_website/myproject/luki-app/public/images&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\darke\PycharmProjects\my_website\myproject\luki-app\public\images" />
+      <recent name="C:\Users\darke\PycharmProjects\my_website\myproject\media\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\darke\PycharmProjects\my_website\myproject\luki-app\src\components" />
+      <recent name="C:\Users\darke\PycharmProjects\my_website\myproject\luki-app\src\pages" />
+      <recent name="C:\Users\darke\PycharmProjects\my_website\myproject\luki-app\src" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
+        <option value="bundled-python-sdk-fb887030ada0-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.21565.199" />
       </set>
     </attachedChunks>
   </component>
@@ -99,14 +128,70 @@
       <option name="project" value="LOCAL" />
       <updated>1731613673257</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="парсер">
+      <option name="closed" value="true" />
+      <created>1732037687012</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732037687012</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Сайт с товарами и корзиной">
+      <option name="closed" value="true" />
+      <created>1732831457889</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732831457889</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Пока что заработала регистрация и вход">
+      <option name="closed" value="true" />
+      <created>1733064898358</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733064898358</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Проект на bootstrap">
+      <option name="closed" value="true" />
+      <created>1733576404859</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733576404859</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Почти готово">
+      <option name="closed" value="true" />
+      <created>1733782798801</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733782798801</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="123" />
     <MESSAGE value="DRF" />
     <MESSAGE value="Начало проекта" />
     <MESSAGE value="add products" />
-    <option name="LAST_COMMIT_MESSAGE" value="add products" />
+    <MESSAGE value="парсер" />
+    <MESSAGE value="Сайт с товарами и корзиной" />
+    <MESSAGE value="Пока что заработала регистрация и вход" />
+    <MESSAGE value="Проект на bootstrap" />
+    <MESSAGE value="Почти готово" />
+    <option name="LAST_COMMIT_MESSAGE" value="Почти готово" />
   </component>
 </project>

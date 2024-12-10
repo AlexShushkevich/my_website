@@ -29,10 +29,9 @@ def register(request):
         if CustomUser.objects.filter(username=username).exists():
             return JsonResponse({'error': 'User already exists'}, status=400)
 
-        # Create user
         user = CustomUser.objects.create_user(username=username, password=password)
 
-        # The profile is automatically created through the signal (no need to manually create it here)
+
         return JsonResponse({'message': 'User registered successfully'}, status=201)
 
     return JsonResponse({'error': 'Invalid request method'}, status=405)
@@ -81,7 +80,7 @@ class UserProfileView(APIView):
         return Response(serializer.data)
 
     def put(self, request):
-        # Try to get the user profile or create one if it does not exist
+       
         try:
             profile = request.user.profile
         except UserProfile.DoesNotExist:

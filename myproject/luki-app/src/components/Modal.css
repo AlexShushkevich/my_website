@@ -63,7 +63,7 @@
     background-color: #f5c6cb;
 }
 
-/* Сообщения об ошибке и успехе */
+
 .success-message {
     color: green;
     margin-top: 10px;
@@ -72,4 +72,18 @@
 .error-message {
     color: red;
     margin-top: 10px;
+}
+
+.call-request-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 1rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.call-request-btn:hover {
+    background-color: #0056b3;
 }
