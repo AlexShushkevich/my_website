@@ -4,6 +4,6 @@ from .views import ProductListView, ProductDetailView, ProductListByGroupView, C
 urlpatterns = [
     path('products/', ProductListView.as_view(), name='product-list'),
     path('products/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
-    path('products/group/<str:group>/', ProductListByGroupView.as_view(), name='product-list-by-group'),  # Здесь убрали избыточный api/
+    path('products/group/<str:group>/', ProductListByGroupView.as_view(), name='product-list-by-group'),
     path('cart/', CartView.as_view(), name='cart'),
 ]

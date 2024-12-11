@@ -7,6 +7,7 @@ from .models import Cart, CartItem, Product
 from .serializers import CartSerializer
 
 
+
 # Список всех товаров
 class ProductListView(generics.ListCreateAPIView):
     queryset = Product.objects.all().order_by("-created_at")

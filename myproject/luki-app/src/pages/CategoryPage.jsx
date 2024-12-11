@@ -44,6 +44,7 @@ const CategoryPage = ({ addToCart, removeFromCart, cartItems }) => {
                 <div className="d-flex">
                     <div className="product-list-container">
                         <ProductList products={products} addToCart={addToCart} />
+                        <ProductList products={products} currentCategory={group} />
                     </div>
                     <div className="cart-container">
                         <Cart cartItems={cartItems} removeFromCart={removeFromCart} />

@@ -48,14 +48,30 @@ class KupilukiParser:
                 image_tag = card.find('img')
                 image_url = image_tag['src'] if image_tag else None
 
+                # Извлекаем ссылку на карточку товара
+                detail_link_tag = card.find('a', class_='thumb shine')
+                detail_link = detail_link_tag['href'] if detail_link_tag else None
+
                 products.append({
                     'name': name,
                     'price': price,
                     'image_url': image_url,
+                    'detail_link': detail_link,
                 })
             except Exception as e:
                 print(f"Ошибка при парсинге карточки: {e}")
         return products
+
+    def parse_product_detail(self, detail_url):
+        if not detail_url.startswith(('http://', 'https://')):
+            detail_url = f"https://kupiluki.by{detail_url}"
+
+        html = self.fetch_html(detail_url)
+        soup = BeautifulSoup(html, 'lxml')
+
+        description_tag = soup.find('div', class_='descr-outer-wrapper')
+        description = description_tag.get_text(strip=True) if description_tag else "Описание отсутствует"
+        return description
 
     def save_image(self, image_url):
         if not image_url:
@@ -95,11 +111,7 @@ class KupilukiParser:
             # Создаём директорию, если её нет
             os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
-            # Уменьшаем изображение перед сохранением
-            img = Image.open(BytesIO(response.content))
-            img = img.convert("RGB")
-            img.thumbnail((300, 300))  # Уменьшение до 300x300
-            img.save(save_path, format="JPEG", quality=85)
+
 
             # Возвращаем путь относительно MEDIA_ROOT
             return f'product_images/{image_name}'
@@ -116,6 +128,9 @@ class KupilukiParser:
             try:
                 print(f"Обработка товара: {product['name']}")
 
+                # Парсинг описания из карточки товара
+                description = self.parse_product_detail(product['detail_link'])
+
                 # Сохранение изображения
                 image_path = self.save_image(product['image_url'])
 
@@ -126,6 +141,7 @@ class KupilukiParser:
                         'price': product['price'],
                         'group': 'pogrebok-mini',
                         'image': image_path,
+                        'description': description,
                     },
                 )
                 if created:

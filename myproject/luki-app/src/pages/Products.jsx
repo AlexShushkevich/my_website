@@ -4,7 +4,7 @@ import ProductList from '../components/ProductList';
 import Cart from '../components/Cart';
 import './Products.css';
 
-const Products = ({ products, cartItems, addToCart, removeFromCart, refreshCart, isAuthenticated }) => {
+const Products = ({ products = [], cartItems, addToCart, removeFromCart, refreshCart, isAuthenticated }) => {
     const navigate = useNavigate();
 
     return (

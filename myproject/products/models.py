@@ -14,7 +14,7 @@ class Product(models.Model):
     description = models.TextField(default="Описание отсутствует")
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     group = models.CharField(max_length=50, choices=GROUP_CHOICES, default='NONE')
-    image = models.ImageField(upload_to='product_images/', blank=True, null=True)  # Поле для изображений
+    image = models.ImageField(upload_to='product_images/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -41,3 +41,10 @@ class CartItem(models.Model):
 
     def get_total_price(self):
         return self.quantity * self.product.price
+
+class ProductImage(models.Model):
+    image = models.ImageField(upload_to='products/additional/')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='additional_images')
+
+    def __str__(self):
+        return f"Доп. изображение для {self.product.name}"
