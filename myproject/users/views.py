@@ -24,17 +24,17 @@ def register(request):
         password = data.get('password')
 
         if not username or not password:
-            return JsonResponse({'error': 'Username and password required'}, status=400)
+            return JsonResponse({'error': 'Требуется имя пользователя и пароль'}, status=400)
 
         if CustomUser.objects.filter(username=username).exists():
-            return JsonResponse({'error': 'User already exists'}, status=400)
+            return JsonResponse({'error': 'Пользователь уже существует'}, status=400)
 
         user = CustomUser.objects.create_user(username=username, password=password)
 
 
-        return JsonResponse({'message': 'User registered successfully'}, status=201)
+        return JsonResponse({'message': 'Пользователь успешно зарегистрировался'}, status=201)
 
-    return JsonResponse({'error': 'Invalid request method'}, status=405)
+    return JsonResponse({'error': 'Недопустимый метод запроса'}, status=405)
 
 
 @csrf_exempt
@@ -45,7 +45,7 @@ def user_login(request):
         password = data.get('password')
 
         if not username or not password:
-            return JsonResponse({'error': 'Username and password required'}, status=400)
+            return JsonResponse({'error': 'Требуется имя пользователя и пароль'}, status=400)
 
         user = authenticate(username=username, password=password)
         if user:
@@ -56,14 +56,14 @@ def user_login(request):
                 'refresh': str(refresh)
             })
 
-        return JsonResponse({'error': 'Invalid credentials'}, status=400)
+        return JsonResponse({'error': 'Неверные учетные данные'}, status=400)
 
-    return JsonResponse({'error': 'Invalid request method'}, status=405)
+    return JsonResponse({'error': 'Недопустимый метод запроса'}, status=405)
 
 
 def user_logout(request):
     logout(request)
-    return JsonResponse({'message': 'Logged out successfully'})
+    return JsonResponse({'message': 'Успешно вышел из системы'})
 
 
 class UserProfileView(APIView):
@@ -73,7 +73,7 @@ class UserProfileView(APIView):
         try:
             profile = request.user.profile
         except UserProfile.DoesNotExist:
-            return Response({'error': 'Profile not found'}, status=404)
+            return Response({'error': 'Профиль не найден'}, status=404)
 
         # Serialize the profile data
         serializer = UserProfileSerializer(profile)

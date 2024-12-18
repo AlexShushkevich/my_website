@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Cart.css';
+import ModalOrder from './ModalOrder';
 
-const Cart = ({ cartItems, removeFromCart }) => {
+const Cart = ({ cartItems, removeFromCart, userProfile }) => {
+    const [isOrderModalOpen, setOrderModalOpen] = useState(false);
+
     const total = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
     return (
@@ -22,10 +25,22 @@ const Cart = ({ cartItems, removeFromCart }) => {
                     <div className="total">
                         <h5>Итого: <span>{total.toFixed(2)} руб.</span></h5>
                     </div>
+                    <button
+                        className="btn btn-primary btn-order"
+                        onClick={() => setOrderModalOpen(true)}
+                    >
+                        Заказать
+                    </button>
                 </div>
             ) : (
                 <p>Корзина пуста</p>
             )}
+            <ModalOrder
+                isOpen={isOrderModalOpen}
+                onClose={() => setOrderModalOpen(false)}
+                userProfile={userProfile}
+                cartItems={cartItems}
+            />
         </div>
     );
 };

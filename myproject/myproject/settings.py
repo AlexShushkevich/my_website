@@ -48,19 +48,19 @@ MIDDLEWARE = [
 
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # URL фронтенда
+    'http://localhost:3000',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_COOKIE_HTTPONLY = False # Токен доступен в JavaScript
+CSRF_COOKIE_HTTPONLY = False
 
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_NAME = "csrftoken"
 
 MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000',  # URL фронтенда
+    'http://localhost:3000',
 ]
 
 
