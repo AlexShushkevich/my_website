@@ -28,7 +28,7 @@ const ModalCallRequest = ({ isOpen, onClose }) => {
         }
 
         try {
-            // Отправляем данные в Telegram
+
             const telegramApiUrl = `https://api.telegram.org/bot7678597087:AAF0iIrFeUDcgJTOYyBH1WPI6UzxyL9ACrA/sendMessage`;
             await fetch(telegramApiUrl, {
                 method: 'POST',

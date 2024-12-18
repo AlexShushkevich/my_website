@@ -9,7 +9,7 @@ from django.conf import settings
 
 
 class KupilukiParser:
-    BASE_URL = "https://kupiluki.by/catalog/napolnye_lyuki/lyuki_napolnye_semnye_pogrebok_mini/"
+    BASE_URL = "https://kupiluki.by/catalog/lyuki_pod_plitku/lyuki_evrostandart/"
 
     HEADERS = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -81,7 +81,7 @@ class KupilukiParser:
             # Если это встроенный Base64-URL
             if image_url.startswith("data:image"):
                 image_type, base64_data = image_url.split(',', 1)
-                extension = image_type.split('/')[1].split(';')[0]  # Например, jpg или png
+                extension = image_type.split('/')[1].split(';')[0]
                 image_name = f"product_image_{hash(image_url)}.{extension}"
                 save_path = os.path.join(settings.MEDIA_ROOT, 'product_images', image_name)
 
@@ -139,7 +139,7 @@ class KupilukiParser:
                     name=product['name'],
                     defaults={
                         'price': product['price'],
-                        'group': 'pogrebok-mini',
+                        'group': 'eurostandard',
                         'image': image_path,
                         'description': description,
                     },

@@ -9,12 +9,21 @@ const CategoryPage = ({ addToCart, removeFromCart, cartItems }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [categoryName, setCategoryName] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setLoading(true);
             try {
-                const response = await api.get(`/products/group/${group}/`);
-                setProducts(response.data);
+                const response = await api.get(`/products/group/${group}/`, {
+                    params: {
+                        page: currentPage,
+                    },
+                });
+
+                setProducts(response.data.results);
+                setTotalPages(Math.ceil(response.data.count / 8));
                 setLoading(false);
 
 
@@ -33,7 +42,19 @@ const CategoryPage = ({ addToCart, removeFromCart, cartItems }) => {
         };
 
         fetchProducts();
-    }, [group]);
+    }, [group, currentPage]);
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage((prevPage) => prevPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage((prevPage) => prevPage - 1);
+        }
+    };
 
     return (
         <div className="category-page">
@@ -44,7 +65,25 @@ const CategoryPage = ({ addToCart, removeFromCart, cartItems }) => {
                 <div className="d-flex">
                     <div className="product-list-container">
                         <ProductList products={products} addToCart={addToCart} />
-                        <ProductList products={products} currentCategory={group} />
+                        <div className="pagination">
+                            <button
+                                className="btn btn-secondary"
+                                onClick={handlePreviousPage}
+                                disabled={currentPage === 1}
+                            >
+                                Назад
+                            </button>
+                            <span className="page-info">
+                                Страница {currentPage} из {totalPages}
+                            </span>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={handleNextPage}
+                                disabled={currentPage === totalPages}
+                            >
+                                Вперед
+                            </button>
+                        </div>
                     </div>
                     <div className="cart-container">
                         <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
@@ -56,4 +95,3 @@ const CategoryPage = ({ addToCart, removeFromCart, cartItems }) => {
 };
 
 export default CategoryPage;
-

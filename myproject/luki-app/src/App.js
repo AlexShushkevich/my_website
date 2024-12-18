@@ -8,6 +8,7 @@ import RoutesConfig from './routes/RoutesConfig';
 import useCart from './hooks/useCart';
 import useAuth from './hooks/useAuth';
 
+
 const App = () => {
     const { isAuthenticated, handleLogin, handleLogout } = useAuth();
     const { cartItems, addToCart, removeFromCart, fetchCart } = useCart(isAuthenticated);

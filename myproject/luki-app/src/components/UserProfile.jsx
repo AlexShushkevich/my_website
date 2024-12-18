@@ -15,7 +15,7 @@ const UserProfile = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // Загрузка данных профиля
+
         const fetchProfile = async () => {
             try {
                 const response = await api.get('/users/profile/');

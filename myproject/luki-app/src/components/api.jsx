@@ -7,10 +7,10 @@ const api = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
-    withCredentials: true, // Для отправки cookies
+    withCredentials: true,
 });
 
-// Интерсептор для запросов
+
 api.interceptors.request.use(
     (config) => {
         const csrfToken = document.cookie
@@ -27,13 +27,13 @@ api.interceptors.request.use(
             config.headers.Authorization = `Bearer ${jwtToken}`;
         }
 
-        console.log('Request:', config); // Лог запросов
+        console.log('Request:', config);
         return config;
     },
     (error) => Promise.reject(error)
 );
 
-// Интерсептор для ответов
+
 api.interceptors.response.use(
     (response) => response,
     async (error) => {

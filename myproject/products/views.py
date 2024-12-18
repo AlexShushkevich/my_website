@@ -5,26 +5,31 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Cart, CartItem, Product
 from .serializers import CartSerializer
+from rest_framework.pagination import PageNumberPagination
 
 
+class ProductPagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 50
 
-# Список всех товаров
 class ProductListView(generics.ListCreateAPIView):
     queryset = Product.objects.all().order_by("-created_at")
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     search_fields = ["name", "description"]
+    pagination_class = ProductPagination
 
 
-# Детали конкретного товара
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
 
-class ProductListByGroupView(generics.ListCreateAPIView):
+class ProductListByGroupView(generics.ListAPIView):
     serializer_class = ProductSerializer
+    pagination_class = ProductPagination
 
     def get_queryset(self):
         group = self.kwargs['group']

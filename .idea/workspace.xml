@@ -4,21 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df2c707d-49ff-46f3-9874-ba61d510201b" name="Changes" comment="Почти готово">
-      <change afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ModalCallRequest.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductCard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/my_website.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/my_website.iml" afterDir="false" />
+    <list default="true" id="df2c707d-49ff-46f3-9874-ba61d510201b" name="Changes" comment="Проект готов к сдаче )">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/Header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/Cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/Cart.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/Modal.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/Modal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/public/images/diplomat.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/public/images/diplomat.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/ModalCallRequest.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ModalCallRequest.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/ModalLogin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ModalLogin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductCard.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductList.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductList.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/ProductList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/UserProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/UserProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/components/api.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/components/api.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/pages/CategoryPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/pages/CategoryPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/pages/Home.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/pages/Home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/pages/ProductDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/pages/ProductDetail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/pages/ProductDetail.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/pages/ProductDetail.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/pages/Products.css" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/pages/Products.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/pages/Products.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/luki-app/src/pages/Products.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/users/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/users/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/services/productService.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/luki-app/src/services/userService.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/myparser/kupiluki_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myparser/kupiluki_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/myproject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/myproject/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/products/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/products/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,22 +66,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/darke/PycharmProjects/my_website/myproject/luki-app/public/images&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/darke/PycharmProjects/my_website/myproject/luki-app/public/images",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.CSV/TSV/PSV"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
+  "keyToStringList": {
+    "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": []
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\darke\PycharmProjects\my_website\myproject\luki-app\public\images" />
+      <recent name="C:\Users\darke\PycharmProjects\my_website\myproject\luki-app\src\background" />
       <recent name="C:\Users\darke\PycharmProjects\my_website\myproject\media\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -168,7 +179,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733782798801</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Промежуточная готовность">
+      <option name="closed" value="true" />
+      <created>1733857428639</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733857428639</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Проект готов к сдаче )">
+      <option name="closed" value="true" />
+      <created>1733927963995</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1733927963995</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -192,6 +219,8 @@
     <MESSAGE value="Пока что заработала регистрация и вход" />
     <MESSAGE value="Проект на bootstrap" />
     <MESSAGE value="Почти готово" />
-    <option name="LAST_COMMIT_MESSAGE" value="Почти готово" />
+    <MESSAGE value="Промежуточная готовность" />
+    <MESSAGE value="Проект готов к сдаче )" />
+    <option name="LAST_COMMIT_MESSAGE" value="Проект готов к сдаче )" />
   </component>
 </project>

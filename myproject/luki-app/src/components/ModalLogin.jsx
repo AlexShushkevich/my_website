@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import api from './api';
 import './Modal.css';
 
-ReactModal.setAppElement('#root'); // Для повышения доступности
+ReactModal.setAppElement('#root');
 
 const ModalLogin = ({ isOpen, onClose, handleLogin }) => {
     const [username, setUsername] = useState('');
@@ -16,13 +16,13 @@ const ModalLogin = ({ isOpen, onClose, handleLogin }) => {
             const response = await api.post('/users/login/', { username, password });
             const { access, refresh } = response.data;
 
-            // Сохраняем токены в localStorage
+
             localStorage.setItem('access_token', access);
             localStorage.setItem('refresh_token', refresh);
 
-            // Обновляем состояние авторизации
+
             handleLogin();
-            onClose(); // Закрываем модальное окно
+            onClose();
         } catch (err) {
             setError(err.response?.data?.error || 'Ошибка авторизации');
         }

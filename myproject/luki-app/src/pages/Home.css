@@ -29,9 +29,11 @@
 }
 
 .category-image {
-    width: 70%;
-    height: 200px;
-    object-fit: cover;
+    width: 100%;
+    max-width: 250px;
+    height: 300px;
+    object-fit: auto;
+    border-radius: 8px;
 }
 
 .category-title {
@@ -44,3 +46,4 @@
 .category-title:hover {
     color: #007bff;
 }
+

@@ -46,7 +46,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-# CSRF и CORS настройки
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  # URL фронтенда
 ]

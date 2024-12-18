@@ -1,10 +1,14 @@
 .product-card {
-    background: #fff;
-    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: #fff;
     border-radius: 8px;
-    overflow: hidden;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
@@ -14,8 +18,10 @@
 
 .product-image {
     width: 100%;
+    max-width: 150px;
     height: auto;
-    display: block;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .product-info {

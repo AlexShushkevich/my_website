@@ -37,41 +37,59 @@ const ProductDetail = ({ addToCart, cartItems, removeFromCart, refreshCart }) =>
 
     return (
         <div className="product-detail-container">
+
+            <div className="cart-fixed">
+                <h2>Корзина</h2>
+                <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
+            </div>
+
+            <button className="btn btn-primary mb-3" onClick={handleBackClick}>
+                Назад к списку товаров
+            </button>
+
             <div className="product-detail">
-                <button className="btn btn-primary mb-3" onClick={handleBackClick}>
-                    Назад к списку товаров
-                </button>
-                <div className="product-detail-card">
-                    <img src={product.image} alt={product.name} className="product-detail-image" />
-                    <h2>{product.name}</h2>
-                    <p>{product.description}</p>
-                    <p>Цена: {product.price} руб.</p>
+                <div className="product-main">
+                    <img
+                        src={product.image}
+                        alt={product.name}
+                        className="product-detail-image"
+                    />
+
+
+                    {product.additional_images?.length > 0 && (
+                        <div className="additional-images">
+                            <div className="image-gallery">
+                                {product.additional_images.map((img) => (
+                                    <img
+                                        key={img.id}
+                                        src={img.image}
+                                        alt={`Доп. изображение ${product.name}`}
+                                        className="gallery-image"
+                                        onClick={() =>
+                                            window.open(img.image, '_blank', 'noopener,noreferrer')
+                                        }
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                <div className="product-details">
+                    <h2 className="product-detail-title">{product.name}</h2>
+                    <h2 className="product-detail-price">{product.price} руб.</h2>
                     <button
-                        className="btn btn-success"
+                        className="btn btn-success btn-add-to-cart"
                         onClick={handleAddToCart}
                     >
                         Добавить в корзину
                     </button>
                 </div>
-                {product.additional_images && product.additional_images.length > 0 && (
-                    <div className="additional-images">
-                        <h3>Дополнительные фотографии</h3>
-                        <div className="image-gallery">
-                            {product.additional_images.map((img) => (
-                                <img
-                                    key={img.id}
-                                    src={img.image}
-                                    alt={`Дополнительное изображение ${product.name}`}
-                                    className="gallery-image"
-                                />
-                            ))}
-                        </div>
-                    </div>
-                )}
             </div>
-            <div className="cart-section">
-                <h2>Корзина</h2>
-                <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
+
+            <div className="product-detail-description">
+                <h3>Описание товара</h3>
+                <p>{product.description}</p>
             </div>
         </div>
     );
